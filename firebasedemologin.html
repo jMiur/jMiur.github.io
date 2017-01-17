@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Vagacode Firebase Demo Login</title>
+<link id="favicon1" rel="shortcut icon" type="image/x-icon" href="http://wiii.me/theme/avatar/6.png">
+<link id="favicon2" rel="icon" type="image/x-icon" href="http://wiii.me/theme/avatar/6.png">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="utf-8">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta http-equiv="content-language" content="Spanish">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta http-equiv="cleartype" content="on">
+<meta name="googlebot" content="noindex,noarchive,follow,noodp">
+<meta name="robots" content="noindex,follow">
+<meta name="msnbot" content="noindex,follow">
+<style type="text/css">
+* {border:none;margin:0;outline:none;padding:0;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;word-wrap:break-word;}
+html {font-size:100%;height:100%;width:100%;}
+body {background-color: #fafafa;color:#000;font-size:24px;height:100%;line-height:normal;font-family:sans-serif;min-height:100%;position:relative;width:100%;}
+#contenedor {height: 335px;outline: 1px solid;padding: 20px;text-align: center;width: 480px;}
+#header h1 {font-size: 36px;}
+#header button {-moz-appearance:none;-webkit-appearance:none;background-color: #34B3A0;border-radius: 24px;color: #fff;cursor: pointer;font-family: sans-serif;font-size: 24px;line-height: 1.5em;margin: 0.5em 0;outline: none;padding: 0 1em;}
+#header button:hover {padding: 0 1.5em;}
+.infotest {background-color: #f0f0f0;display: none;height: 235px;padding: 20px;}
+.infotest img {height:96px;width:96px;}
+#logintest p {margin-top: 55px;}
+</style>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript" src="//www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+<script type="text/javascript">
+// inicializar Firebase
+var refDATABASE;
+var firebaseconfig = {
+	apiKey: "AIzaSyAF_ly8KhXVu2GIjhffVWEn4IfQhgxV2Eo",
+	authDomain: "vagacode-c7e77.firebaseapp.com",
+	databaseURL: "https://vagacode-c7e77.firebaseio.com",
+	storageBucket: "vagacode-c7e77.appspot.com",
+	messagingSenderId: "397490435172"
+};
+firebase.initializeApp(firebaseconfig);
+</script>
+</head>
+<body>
+<div id="contenedor">
+	<div id="header">
+		<h1>Firebase Demo Login</h1>
+		<div id="logintest" class="infotest">
+			<p>el usuario no est&aacute; registrado</p>
+			<button>ingresar con Google</button>
+		</div>
+		<div id="logouttest" class="infotest">
+			<button>cerrar sesi&oacute;n</button>
+		</div>
+	</div>
+	<div id="contenedor-inner">
+	</div>
+	<div id="footer">
+	</div>
+</div>
+<script>
+
+window.onload = function(){
+	// inicializar y registrar firebase para este usuario
+	firebase.auth().onAuthStateChanged(function(user){
+		// leer status del usuario : se activa cada vez que se hace login o logout -> https://firebase.google.com/docs/reference/js/firebase.auth.Auth.html#onAuthStateChanged
+		if(user){
+			// el usuario esta logueado
+			mostrarUsuario(user);
+			$('#logouttest').show();
+		} else {
+			$('#logintest').show();
+		}
+	});
+}
+
+$(document).on('click', '#logintest button', function(){
+	if (firebase.auth().currentUser){alert("firebase.auth->currentUser");return;}
+	var provider = new firebase.auth.GoogleAuthProvider();
+	firebase.auth().signInWithPopup(provider).then(function(result){
+		var token = result.credential.accessToken; // This gives you a Google Access Token. You can use it to access the Google API.
+		mostrarUsuario(result.user); // datos del usuario
+		$('#logouttest').prepend(html);		
+		$('.infotest').toggle();
+	}).catch(function(error){
+		alert('ERROR LOGIN');
+	});
+});
+
+$(document).on('click', '#logouttest button', function(){
+	firebase.auth().signOut().then(function() {
+		// sign-out successful.
+		$('.infotest').toggle();
+		alert('sign-out successful')
+	}, function(error){
+		alert('ERROR LOGOUT');
+	});
+});
+
+function mostrarUsuario(elUSUARIO){
+	var html = '<img src="'+elUSUARIO.photoURL+'"><p>bienvenido '+elUSUARIO.displayName+'</p>';
+	$('#logouttest').prepend(html);		
+}
+</script>
+</body>
+</html>
