@@ -47,7 +47,9 @@ firebase.initializeApp(firebaseconfig);
 			<p>el usuario no est&aacute; registrado</p>
 			<button>ingresar con Google</button>
 		</div>
-		<div id="logouttest" class="infotest">
+		<div id="logouttest" class="infotest" uid="">
+			<img src="">
+			<p>bienvenido <span></span></p>
 			<button>cerrar sesi&oacute;n</button>
 		</div>
 	</div>
@@ -61,7 +63,6 @@ window.onload = function(){
 	firebase.auth().onAuthStateChanged(function(user){
 		if(user){
 			mostrarUsuario(user);
-			$('#logouttest').show();
 		} else {
 			$('#logintest').show();
 		}
@@ -84,8 +85,10 @@ $(document).on('click', '#logouttest button', function(){
 	});
 });
 function mostrarUsuario(elUSUARIO){
-	var html = '<img src="'+elUSUARIO.photoURL+'"><p>bienvenido '+elUSUARIO.displayName+'</p>';
-	$('#logouttest').prepend(html);		
+	$('#logouttest').attr('uid',elUSUARIO.uid);
+	$('#logouttest img').attr('src',elUSUARIO.photoURL);
+	$('#logouttest span').text(elUSUARIO.displayName);
+	$('#logouttest').show();
 }
 </script>
 </body>
