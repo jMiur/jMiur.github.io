@@ -79,7 +79,6 @@ $(document).on('click', '#logintest button', function(){
 $(document).on('click', '#logouttest button', function(){
 	firebase.auth().signOut().then(function() {
 		$('.infotest').toggle();
-		alert('sign-out successful')
 	}, function(error){
 		alert('ERROR LOGOUT');
 	});
