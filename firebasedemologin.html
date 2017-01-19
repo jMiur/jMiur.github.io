@@ -47,7 +47,7 @@ firebase.initializeApp(firebaseconfig);
 			<p>el usuario no est&aacute; registrado</p>
 			<button>ingresar con Google</button>
 		</div>
-		<div id="logouttest" class="infotest" uid="">
+		<div id="logouttest" class="infotest">
 			<img src="">
 			<p>bienvenido <span></span></p>
 			<button>cerrar sesi&oacute;n</button>
@@ -80,7 +80,6 @@ $(document).on('click', '#logouttest button', function(){
 	});
 });
 function mostrarUsuario(elUSUARIO){
-	$('#logouttest').attr('uid',elUSUARIO.uid);
 	$('#logouttest img').attr('src',elUSUARIO.photoURL);
 	$('#logouttest span').text(elUSUARIO.displayName);
 	$('#logouttest').show();
