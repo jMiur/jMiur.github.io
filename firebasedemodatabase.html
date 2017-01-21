@@ -58,7 +58,7 @@ firebase.initializeApp(firebaseconfig);
 <body>
 <div id="contenedor">
 	<div id="header">
-		<h1>Firebase Demo Login</h1>
+		<h1>Firebase Demo Database</h1>
 		<div id="logintest" class="infotest">
 			<p>el usuario no est&aacute; registrado</p>
 			<button>ingresar con Google</button>
@@ -85,14 +85,14 @@ window.onload = function(){
 	// verificar usuario
 	firebase.auth().onAuthStateChanged(function(user){
 		if(user){
-			mostrarUsuario(user); // está registrado
+			mostrarUsuario(user); // estÃ¡ registrado
 		} else {
-			$('#logintest').show(); // no está registrado
+			$('#logintest').show(); // no estÃ¡ registrado
 		}
 	});
 }
 
-// autentificación del usuario : iniciar sesión
+// autentificaciÃ³n del usuario : iniciar sesiÃ³n
 $(document).on('click', '#logintest button', function(){
 	if (firebase.auth().currentUser){alert("firebase.auth->currentUser");return;}
 	var provider = new firebase.auth.GoogleAuthProvider();
@@ -103,7 +103,7 @@ $(document).on('click', '#logintest button', function(){
 	});
 });
 
-// cerrar sesión
+// cerrar sesiÃ³n
 $(document).on('click', '#usuario button', function(){
 	firebase.auth().signOut().then(function(){
 		INFO ={};
@@ -124,7 +124,7 @@ function mostrarUsuario(elUSUARIO){
 
 // verificar base de datos del usuario
 function readDATA(){
-	var uid = firebase.auth().currentUser.uid; // identificador único del usuario
+	var uid = firebase.auth().currentUser.uid; // identificador Ãºnico del usuario
 	var BDD= firebase.database().ref('usuarios/'+uid); // referencia a la base de datos
 	BDD.once("value", function(data){
 		if(data.val()!==null){
@@ -167,11 +167,11 @@ $.fn.isValid = function(){
 // guardar cambios en la base de datos
 $(document).on('click', '#guardar', function(){
 	if($('input[type="text"]').isValid()===false){
-		alert('ERROR: sólo letras entre 3 y 12 caracteres');
+		alert('ERROR: sÃ³lo letras entre 3 y 12 caracteres');
 		return;
 	}
 	if($('input[type="number"]').isValid()===false){
-		alert('ERROR: un número entre 1 y 10');
+		alert('ERROR: un nÃºmero entre 1 y 10');
 		return;
 	}
 	var DATOS = {
