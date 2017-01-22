@@ -85,14 +85,14 @@ window.onload = function(){
 	// verificar usuario
 	firebase.auth().onAuthStateChanged(function(user){
 		if(user){
-			mostrarUsuario(user); // está registrado
+			mostrarUsuario(user); // esta registrado
 		} else {
-			$('#logintest').show(); // no está registrado
+			$('#logintest').show(); // no esta registrado
 		}
 	});
 }
 
-// autentificación del usuario : iniciar sesión
+// autentificacion del usuario : iniciar sesion
 $(document).on('click', '#logintest button', function(){
 	if (firebase.auth().currentUser){alert("firebase.auth->currentUser");return;}
 	var provider = new firebase.auth.GoogleAuthProvider();
@@ -103,10 +103,9 @@ $(document).on('click', '#logintest button', function(){
 	});
 });
 
-// cerrar sesión
+// cerrar sesion
 $(document).on('click', '#usuario button', function(){
 	firebase.auth().signOut().then(function(){
-		INFO ={};
 		$('.infotest').toggle();
 	}, function(error){
 		alert('ERROR LOGOUT');
@@ -124,7 +123,7 @@ function mostrarUsuario(elUSUARIO){
 
 // verificar base de datos del usuario
 function readDATA(){
-	var uid = firebase.auth().currentUser.uid; // identificador único del usuario
+	var uid = firebase.auth().currentUser.uid; // identificador unico del usuario
 	var BDD= firebase.database().ref('usuarios/'+uid); // referencia a la base de datos
 	BDD.once("value", function(data){
 		if(data.val()!==null){
@@ -167,11 +166,11 @@ $.fn.isValid = function(){
 // guardar cambios en la base de datos
 $(document).on('click', '#guardar', function(){
 	if($('input[type="text"]').isValid()===false){
-		alert('ERROR: sólo letras entre 3 y 12 caracteres');
+		alert('ERROR: solo letras entre 3 y 12 caracteres');
 		return;
 	}
 	if($('input[type="number"]').isValid()===false){
-		alert('ERROR: un número entre 1 y 10');
+		alert('ERROR: un numero entre 1 y 10');
 		return;
 	}
 	var DATOS = {
@@ -192,3 +191,4 @@ $(document).on('click', '#guardar', function(){
 </script>
 </body>
 </html>
+
