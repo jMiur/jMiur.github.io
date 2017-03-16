@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="IE=9,chrome=1" http-equiv="X-UA-Compatible">
+<meta charset="utf-8">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta http-equiv="content-language" content="Spanish">
+<meta content="True" name="HandheldFriendly">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Los monos y las bibliotecas</title>
+<!--[if lt IE 9]>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+<![endif]-->
+<!--[if (gte IE 9) | (!IE)]><!-->	
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js" type="text/javascript"></script>
+<!--<![endif]--> 
+<style>
+* {border:none;box-sizing:border-box;margin:0;outline:none;padding:0;}
+</style>
+</head>
+<body>
+<div id="monitos"></div>
+<script type="text/javascript">
+var number = 30;
+var length = 0;
+var jran = 0;
+function writers() { 
+	jran = (jran*9301+49297) % 233280;
+	letterval = Math.ceil( (jran/(233280*1.0)) *number);
+	length++;
+	if (letterval == 0 || letterval >= 27){
+		thetext = " ";
+	} else {
+		thetext =String.fromCharCode(letterval+64)
+	}
+	escriben = $('#monitos').text() + thetext;
+	$('#monitos').text(escriben);
+	if (length > 200) {
+		length = 0;
+		$('#monitos').text('');
+	}
+   setTimeout('writers();', 15);
+}
+$(document).ready(function(){
+	setTimeout('writers();', 15);
+});
+</script>
+<body>
+</html>
