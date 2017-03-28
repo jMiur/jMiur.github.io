@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta http-equiv="content-language" content="Spanish">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta http-equiv="cleartype" content="on">
+<title>iframe</title>
+<style>
+* {border:none;margin:0;outline:none;padding:0;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;word-wrap:break-word;}
+html {font-size:100%;height:100%;width:100%;}
+body {height:100%;line-height:normal;font-family:sans-serif;min-height:100%;position:relative;width:100%;}
+header, footer {color: #888;display: block;font-size: 5vw;height: 6vw;text-align: center;}
+header {background-color: aqua;}
+footer {background-color: yellow;}
+#contenedor {display: flex;flex-flow: row nowrap;}
+#contenedor article {background-color: #f0ffff;color: #444;flex: 3 1 50%;font-size: 3vw;order: 2;padding: 1em;text-align: center;}
+section#izquierda {background-color: #ff7f50;flex: 1 6 25%;order: 1;}
+section#derecha {background-color: #ff69b4;flex: 1 6 25%;order: 3;}
+@media all and (max-width: 400px) {
+	#contenedor{flex-flow: column;}
+	#contenedor article, section#izquierda, section#derecha {order: 0;}
+}
+</style>
+</head>
+<body>
+<header>encabezado</header>
+<div id='contenedor'>
+	<section id="izquierda"></section>
+	<section id="derecha"></section>
+	<article>
+		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.<br>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
+	</article>
+</div>
+<footer>pi&eacute; de p&aacute;gina</footer>
+</body>
+</html>
